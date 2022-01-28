@@ -1,0 +1,13 @@
+.inputs__email {
+  margin-bottom: 3.2rem;
+}
+.labels {
+  width: 100%;
+}
+.inputs {
+  width: 100%;
+  padding: 1rem 0.8rem;
+  margin-top: 0.8rem;
+  border: 1px solid #bdbcbc;
+  border-radius: 0.4rem;
+}
