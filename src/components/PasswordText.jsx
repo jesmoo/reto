@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Input from './Input';
 import Btns from './Btns';
+import passwordValidation from '../utils/passwordValidation';
 
 import '../style/components/PasswordText.css';
 
@@ -39,6 +40,10 @@ const PasswordText = ({ passConditional, email }) => {
       setSamePassword(0);
     }
   };
+
+   useEffect(() => {
+     let validation = passwordValidation(pasword, validationArray);
+   });
 
   return (
     <section className="main__passwordCheck">
