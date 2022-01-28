@@ -1,3 +1,5 @@
+import errorMsj from './errorMsj';
+
 const sendData = async (datas) => {
   const URL = 'https://frontend-recruiting.100ladrillos.com/';
   const sendURL = `${URL}api/singUp`;
@@ -16,13 +18,12 @@ const sendData = async (datas) => {
 
   if (!response.ok) {
     const { url, status, statusText } = response;
-    if (status === 0) {
-      alert('error');
-    }
+    let errorsMsj = errorMsj(status);
     throw Error(`Error: ${status} ${statusText} in fetch ${url}`);
   }
   const result = await response.json();
 
   return result;
 };
+
 export default sendData;
