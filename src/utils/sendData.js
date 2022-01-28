@@ -14,10 +14,9 @@ const sendData = async (datas) => {
     };
 
     const response = await fetch(sendURL, sendMethod);
-    const result = await response.json();
     if (response.ok) {
-        console.log('enviado');
-        return result;
+      const result = await response.json();
+      return result;
       // return <Redirect to="/2/phone'" />;
     }
   } catch (err) {

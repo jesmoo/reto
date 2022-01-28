@@ -1,15 +1,8 @@
-import React, { useRef, useEffect, useState } from 'react';
-import Input from './Input';
-import Btns from './Btns';
-import Error from './Error';
+import React, { useRef, useEffect } from 'react';
 import passwordValidation from '../utils/passwordValidation';
-import sendData from '../utils/sendData';
 import '../Styles/components/PasswordText.css';
 
-const PasswordText = ({ passConditional, email }) => {
-  const [passwordCheck, setPasswordCheck] = useState({});
-  const [samePassword, setSamePassword] = useState(0);
-
+const PasswordText = ({ passConditional }) => {
   const charactesPassword = '!”#$%&/()=?¿^*@‚[]{};:_><,.-|`+.';
 
   const characters = useRef();
@@ -27,31 +20,8 @@ const PasswordText = ({ passConditional, email }) => {
     repetiveString,
     repetiveNumber,
   ];
+
   let pasword = passConditional;
-
-  const handlePasswordCheck = (e) => {
-    e.preventDefault();
-
-    const PasswordValue = e.target.value;
-    setPasswordCheck({ ...passwordCheck, typed: PasswordValue });
-    if (pasword === PasswordValue) {
-      setSamePassword(samePassword + 1);
-    } else {
-      setSamePassword(0);
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const emailData = email;
-    const passwordData = passConditional;
-    const datas = { email: emailData, password: passwordData };
-
-    if (passwordData.length > 0 && emailData.length > 0) {
-      const result = sendData(datas);
-    }
-  };
 
   useEffect(() => {
     let validation = passwordValidation(pasword, validationArray);
@@ -94,22 +64,6 @@ const PasswordText = ({ passConditional, email }) => {
           (ej: 123).
         </p>
       </div>
-      <Input
-        classSection={'passwordCheck__again'}
-        text={'Confirma tu contraseña'}
-        type={'password'}
-        place={'Contraseña'}
-        handle={handlePasswordCheck}
-        value={passwordCheck.typed || ''}
-      />
-      {samePassword ? (
-        <Btns
-          classNames={'passwordCheck-btn'}
-          text={'Continuar'}
-          onClicks={handleSubmit}
-        />
-      ) : null}
-      <Error text={'Correo ya registrado'} />
     </section>
   );
 };
