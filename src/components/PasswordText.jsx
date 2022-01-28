@@ -1,8 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
-// import { Redirect } from 'react-router-dom';
 import Input from './Input';
 import Btns from './Btns';
+import Error from './Error';
 import passwordValidation from '../utils/passwordValidation';
+import sendData from '../utils/sendData';
 import '../Styles/components/PasswordText.css';
 
 const PasswordText = ({ passConditional, email }) => {
@@ -39,37 +40,16 @@ const PasswordText = ({ passConditional, email }) => {
       setSamePassword(0);
     }
   };
-  const handleSubmit = async (e) => {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const URL = 'https://frontend-recruiting.100ladrillos.com/';
-    const sendURL = `${URL}api/singUp`;
     const emailData = email;
     const passwordData = passConditional;
+    const datas = { email: emailData, password: passwordData };
 
     if (passwordData.length > 0 && emailData.length > 0) {
-      try {
-        const data = { email: emailData, password: passwordData };
-        const sendMethod = {
-          mode: 'no-cors',
-          method: 'POST',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        };
-
-        const response = await fetch(sendURL, sendMethod);
-        console.log('r:', response);
-        const status = await response.json();
-        if (response.ok) {
-          console.log('enviado');
-          // return <Redirect to="/2/phone'" />;
-        }
-      } catch (err) {
-        console.log('Error al realizar la petición AJAX: ' + err.message);
-      }
+      const result = sendData(datas);
     }
   };
 
@@ -129,6 +109,7 @@ const PasswordText = ({ passConditional, email }) => {
           onClicks={handleSubmit}
         />
       ) : null}
+      <Error text={'Correo ya registrado'} />
     </section>
   );
 };

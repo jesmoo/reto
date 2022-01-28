@@ -1,6 +1,6 @@
 import React from 'react';
-import Btns from '../Components/Btns';
-import BtnNext from '../Components/BtnNext';
+import Btns from '../components/Btns';
+import BtnNext from '../components/BtnNext';
 
 const MainCheckPhone = () => {
   const phone = '9983542853';

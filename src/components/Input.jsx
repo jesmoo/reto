@@ -23,7 +23,6 @@ const Input = ({
         className={`${type}-input inputs`}
         placeholder={place}
       />
-      <p className={`${type}-error none`}>{textError}</p>
     </section>
   );
 };
