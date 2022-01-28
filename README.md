@@ -1,3 +1,8 @@
+# Visualizacion
+
+El reto se empezo con mobile first para tener un mejor flujo de trabajo a la hora
+de los estilos, no se logro completar la vista en modo escritorio
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
