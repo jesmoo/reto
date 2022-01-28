@@ -43,9 +43,15 @@ const InputHome = () => {
     const datas = { email: emailData, password: passwordData };
 
     if (passwordData.length > 0 && emailData.length > 0) {
-      const result = 400;
-      setStatus(result);
-      // const result = sendData(datas);
+      try {
+        const result = sendData(datas);
+        console.log(result);
+        setStatus(result);
+      } catch (err) {
+        console.log(err);
+      }
+      // const result = 400;
+      // setStatus(result);
     }
   };
 
