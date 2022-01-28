@@ -1,0 +1,13 @@
+.main__phone-title {
+  margin-bottom: 1.3rem;
+}
+.main__phone-input {
+  margin-bottom: 2rem;
+}
+.main__phone > a {
+  color: #8c8c8c;
+}
+.main__phone > button:hover {
+  background-color: #ff5a60;
+  color: white;
+}
