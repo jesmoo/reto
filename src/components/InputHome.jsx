@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Input from './Input';
-import Signup from '../components/Signup';
+import Signup from '../Components/Signup';
+import PasswordText from '../Components/PasswordText';
+
+import '../Styles/components/InputHome.css';
 
 const InputHome = () => {
   const [password, setPassword] = useState({});
@@ -36,7 +39,11 @@ const InputHome = () => {
           place={'Contraseña'}
         />
       </section>
-      {passwordLength > 0 ? <h1>pasando</h1> : <Signup />}
+      {passwordLength > 0 ? (
+        <PasswordText passConditional={password.typed} email={email.typed} />
+      ) : (
+        <Signup />
+      )}
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import iconLadrillo from '../assets/icons/Fill4.svg';
-import '../style/components/Header.css';
+import '../Styles/components/Header.css';
 
 const Header = () => {
   return (

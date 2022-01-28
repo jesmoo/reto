@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
+// import { Redirect } from 'react-router-dom';
 import Input from './Input';
 import Btns from './Btns';
 import passwordValidation from '../utils/passwordValidation';
-
-import '../style/components/PasswordText.css';
+import '../Styles/components/PasswordText.css';
 
 const PasswordText = ({ passConditional, email }) => {
   const [passwordCheck, setPasswordCheck] = useState({});
@@ -26,7 +26,6 @@ const PasswordText = ({ passConditional, email }) => {
     repetiveString,
     repetiveNumber,
   ];
-
   let pasword = passConditional;
 
   const handlePasswordCheck = (e) => {
@@ -40,10 +39,43 @@ const PasswordText = ({ passConditional, email }) => {
       setSamePassword(0);
     }
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-   useEffect(() => {
-     let validation = passwordValidation(pasword, validationArray);
-   });
+    const URL = 'https://frontend-recruiting.100ladrillos.com/';
+    const sendURL = `${URL}api/singUp`;
+    const emailData = email;
+    const passwordData = passConditional;
+
+    if (passwordData.length > 0 && emailData.length > 0) {
+      try {
+        const data = { email: emailData, password: passwordData };
+        const sendMethod = {
+          mode: 'no-cors',
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        };
+
+        const response = await fetch(sendURL, sendMethod);
+        console.log('r:', response);
+        const status = await response.json();
+        if (response.ok) {
+          console.log('enviado');
+          // return <Redirect to="/2/phone'" />;
+        }
+      } catch (err) {
+        console.log('Error al realizar la petición AJAX: ' + err.message);
+      }
+    }
+  };
+
+  useEffect(() => {
+    let validation = passwordValidation(pasword, validationArray);
+  });
 
   return (
     <section className="main__passwordCheck">
@@ -91,7 +123,11 @@ const PasswordText = ({ passConditional, email }) => {
         value={passwordCheck.typed || ''}
       />
       {samePassword ? (
-        <Btns classNames={'passwordCheck-btn'} text={'Continuar'} />
+        <Btns
+          classNames={'passwordCheck-btn'}
+          text={'Continuar'}
+          onClicks={handleSubmit}
+        />
       ) : null}
     </section>
   );

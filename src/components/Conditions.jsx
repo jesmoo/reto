@@ -1,5 +1,5 @@
 import React from 'react';
-import '../style/components/Conditions.css';
+import '../Styles/components/Conditions.css';
 
 const Conditions = () => {
   return (
