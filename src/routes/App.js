@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from '../container/Layout';
 import MainHome from '../container/MainHome';
+import MainPhone from '../container/MainPhone';
+import MainCheckPhone from '../container/MainCheckPhone';
 
 import '../Styles/App.css';
 
@@ -12,6 +14,8 @@ const App = () => {
       <Layout>
         <Routes>
           <Route exact path="/" element={<MainHome />} />
+          <Route exact path="/:id/phone" element={<MainPhone />} />
+          <Route exact path="/:id/next" element={<MainCheckPhone />} />
           {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>
       </Layout>
