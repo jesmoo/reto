@@ -1,0 +1,53 @@
+.main__signupWith {
+  width: 100%;
+  margin-top: 3.2rem;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+.decoration-text {
+  width: 8.44rem;
+  height: 1px;
+  position: absolute;
+  background-color: #eaeaea;
+}
+.postionLeft {
+  left: -1.7rem;
+}
+.postionRight {
+  right: -1.5rem;
+}
+.main__signupWith-icon {
+  width: 100%;
+  margin-top: 2.4rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+.signupWith-icon {
+  width: 4.8rem;
+  height: 4.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  box-shadow: 0 0 6px 0 #eaeaea;
+}
+.icon {
+  width: 32px;
+  height: 32px;
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.google {
+  background-image: url('../../assets/icons/google/2000px-Google_G_Logo1.png');
+}
+.microsoft {
+  background-image: url('../../assets/icons/microsoft/microsoft-windows-logo1.png');
+}
+.facebook {
+  background-image: url('../../assets/icons/facebook/facebok1.png');
+}
