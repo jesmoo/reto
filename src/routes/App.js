@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from '../Container/Layout';
-import MainHome from '../Container/MainHome';
+import Layout from '../container/Layout';
+import MainHome from '../container/MainHome';
+
 import '../Styles/App.css';
 
 const App = () => {

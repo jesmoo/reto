@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Input from './Input';
-import Signup from '../Components/Signup';
-import PasswordText from '../Components/PasswordText';
+import Signup from '../components/Signup';
+import PasswordText from '../components/PasswordText';
 
 import '../Styles/components/InputHome.css';
 

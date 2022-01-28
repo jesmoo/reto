@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/components/Btns.css';
+import '../Styles/components/Btns.css';
 
 const Btns = ({ classNames = '', text = 'error', onClicks }) => {
   return (
