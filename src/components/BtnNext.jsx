@@ -1,6 +1,6 @@
 import React from 'react';
 import Btns from './Btns';
-import '../styles/components/BtnNext.css';
+import '../Styles/components/BtnNext.css';
 
 const BtnNext = ({
   classNamePincipal,
