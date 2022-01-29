@@ -4,12 +4,13 @@ import Progress from '../components/Progress';
 import Input from '../components/Input';
 import BtnNext from '../components/BtnNext';
 import Login from '../components/Login';
-import Cookies from 'universal-cookie';
+
+import getData from '../utils/getData';
+import sendData from '../utils/sendData';
 
 import '../Styles/containers/MainPhone.css';
 
 const MainPhone = () => {
-  const cookies = new Cookies();
   const [phone, setPhone] = useState({});
 
   const { id } = useParams();
@@ -21,9 +22,37 @@ const MainPhone = () => {
     setPhone({ ...phone, typed: number });
   };
 
+  const handleNext = async (e) => {
+    const phoneData = phone.typed;
+    const routeSend = `api/phoneNumber`;
+    const routeValidation = `api/phoneNumber/verify`;
+    const data = { number: phoneData };
+
+    const tokenHeader = sessionStorage.getItem('headerToken');
+    const tokenMain = sessionStorage.getItem('mainToken');
+    const tokens = { header: tokenHeader, main: tokenMain };
+
+    const responseSendPhone = await sendData(data, routeSend, tokens);
+    alert('tu codigo de verificacion es: 0011');
+    const responseValidation = await sendData(data, routeSend, tokens);
+
+    return <h1>Hola</h1>;
+    // const response = await sendData(data, sendURL);
+    // if (response.status === 200) {
+    //   sessionStorage.number = phoneData;
+    //   if (sessionStorage.getItem('number')) {
+    //     // window.location.href = '/2/next';
+    //   }
+    // }
+  };
+  const handlePrevious = (e) => {
+    window.location.href = '/';
+  };
+
   useEffect(() => {
-    console.log(cookies.get('email'));
-    console.log(cookies.get('password'));
+    if (!sessionStorage.getItem('email')) {
+      window.location.href = '/';
+    }
   });
 
   return (
@@ -46,9 +75,11 @@ const MainPhone = () => {
           prev={'/'}
           classPrev={'phone__btns-prev'}
           textPrev={'Anterior'}
+          onClicksPrev={handlePrevious}
           next={'next'}
           classNext={'phone__btns-next'}
           textNext={'Continuar'}
+          onClicksNext={handleNext}
         />
       ) : null}
     </>

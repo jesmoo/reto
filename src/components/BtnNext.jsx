@@ -7,14 +7,26 @@ const BtnNext = ({
   prev,
   classPrev,
   textPrev,
+  onClicksPrev,
   next,
   classNext,
   textNext,
+  onClicksNext,
 }) => {
   return (
     <section className={`${classNamePincipal} btnsPrevNext`}>
-      <Btns ubication={prev} classNames={classPrev} text={textPrev} />
-      <Btns ubication={next} classNames={classNext} text={textNext} />
+      <Btns
+        ubication={prev}
+        classNames={classPrev}
+        text={textPrev}
+        onClicks={onClicksPrev}
+      />
+      <Btns
+        ubication={next}
+        classNames={classNext}
+        text={textNext}
+        onClicks={onClicksNext}
+      />
     </section>
   );
 };

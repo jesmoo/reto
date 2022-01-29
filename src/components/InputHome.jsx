@@ -6,61 +6,64 @@ import Btns from './Btns';
 import PasswordText from './PasswordText';
 
 import Cookies from 'universal-cookie';
-
 import sendData from '../utils/sendData';
 
 import '../Styles/components/InputHome.css';
 
 const InputHome = () => {
-  const [password, setPassword] = useState({});
+  const [passwordTyped, setPasswordTyped] = useState({});
   const [passwordCheck, setPasswordCheck] = useState({});
 
   const [status, setStatus] = useState({});
-  const [email, setEmail] = useState({});
+  const [emailTyped, setEmailTyped] = useState({});
 
   const [samePassword, setSamePassword] = useState(0);
 
   const handlePassword = (e) => {
     const PasswordValue = e.target.value;
-    setPassword({ ...password, typed: PasswordValue });
+    setPasswordTyped({ ...passwordTyped, typed: PasswordValue });
   };
   const handleEmail = (e) => {
     const emailValue = e.target.value;
-    setEmail({ ...email, typed: emailValue });
+    setEmailTyped({ ...emailTyped, typed: emailValue });
   };
 
   const handlePasswordCheck = (e) => {
     const PasswordValue = e.target.value;
     setPasswordCheck({ ...passwordCheck, typed: PasswordValue });
-    if (password.typed === PasswordValue) {
+    if (passwordTyped.typed === PasswordValue) {
       setSamePassword(samePassword + 1);
     } else {
       setSamePassword(0);
     }
   };
 
-  const cookies = new Cookies();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const emailData = email.typed;
-    const passwordData = password.typed;
+    const emailData = emailTyped.typed;
+    const passwordData = passwordTyped.typed;
     const data = { email: emailData, password: passwordData };
+
     if (passwordData.length > 0 && emailData.length > 0) {
       const sendURL = `api/singUp`;
-
       const response = await sendData(data, sendURL);
-
+      setStatus(response.status);
       if (response.status === 200) {
-        cookies.set('email: ', emailData, { path: '/' });
-        cookies.set('password: ', passwordData, { path: '/' });
-        window.location.href = '/2/phone';
+        sessionStorage.headerToken = response.config.xsrfHeaderName;
+        sessionStorage.mainToken = response.config.xsrfCookieName;
+        sessionStorage.email = emailData;
+        if (sessionStorage.getItem('email')) {
+          console.log('validacion');
+          // window.location.href = '/2/phone';
+        }
       }
     }
   };
 
-  let passwordLength = password.typed === undefined ? 0 : password.typed.length;
-  let emailLength = email.typed === undefined ? 0 : email.typed.length;
+  let passwordLength =
+    passwordTyped.typed === undefined ? 0 : passwordTyped.typed.length;
+  let emailLength =
+    emailTyped.typed === undefined ? 0 : emailTyped.typed.length;
 
   return (
     <>
@@ -69,7 +72,7 @@ const InputHome = () => {
 
         <Input
           handle={handleEmail}
-          value={email.typed || ''}
+          value={emailTyped.typed || ''}
           name={'email'}
           classSection={'inputs__email'}
           text={'¿Cuál es tu correo electrónico?'}
@@ -79,7 +82,7 @@ const InputHome = () => {
         {status === 400 ? <Error text={'Contraseña invalida'} /> : null}
         <Input
           handle={handlePassword}
-          value={password.typed || ''}
+          value={passwordTyped.typed || ''}
           name={'password'}
           classSection={'inputs__password'}
           text={'Crea tu contraseña'}
@@ -89,7 +92,7 @@ const InputHome = () => {
       </section>
       {passwordLength > 0 ? (
         <>
-          <PasswordText passConditional={password.typed} />
+          <PasswordText passConditional={passwordTyped.typed} />
           <Input
             classSection={'passwordCheck__again'}
             text={'Confirma tu contraseña'}

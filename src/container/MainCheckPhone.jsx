@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Btns from '../components/Btns';
 import BtnNext from '../components/BtnNext';
+
 
 const MainCheckPhone = () => {
   const phone = '9983542853';
@@ -9,6 +10,10 @@ const MainCheckPhone = () => {
   const handleReSend = (e) => {
     console.log('renviados');
   };
+
+  useEffect(() => {});
+  // let email = localStorage.getItem('email');
+  // console.log(email);
 
   return (
     <>

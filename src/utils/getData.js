@@ -2,7 +2,7 @@ import axios from 'axios';
 const URL = 'https://frontend-recruiting.100ladrillos.com/';
 const proxy = 'https://thingproxy.freeboard.io/fetch/';
 
-const sendData = async (datas, route, tokens) => {
+const getData = async (route, tokens) => {
   const tokensData = tokens;
   if (tokensData) {
     axios.defaults.xsrfHeaderName = tokensData.header;
@@ -10,11 +10,11 @@ const sendData = async (datas, route, tokens) => {
   }
   const sendURL = `${URL}${route}`;
 
-  const response = await axios.get(`${proxy}${sendURL}`, datas).catch((err) => {
+  const response = await axios.get(`${proxy}${sendURL}`).catch((err) => {
     console.log(err);
   });
 
   return response;
 };
 
-export default sendData;
+export default getData;
