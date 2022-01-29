@@ -8,26 +8,26 @@ const sendData = async (datas, route, tokens) => {
   if (tokensData) {
     axios.defaults.headers.post['Authorization'] = `Bearer ${tokensData.main}`;
     // axios.defaults.headers.common['Authorization'] = tokensData.main;
-    // Axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = tokensData.main;
 
     // axios.defaults.xsrfHeaderName = tokensData.header;
     // axios.defaults.xsrfCookieName = tokensData.main;
   }
   const sendURL = `${URL}${route}`;
 
-  await axios.interceptors.request.use(
-    function (config) {
-      let token = window.localStorage.getItem('accessToken');
-      console.log(token);
-      if (token) {
-        config.headers.accessToken = token;
-        return config;
-      }
-    },
-    function (error) {
-      return Promise.reject(error);
-    }
-  );
+  // await axios.interceptors.request.use(
+  //   function (config) {
+  //     let token = window.localStorage.getItem('access_token');
+  //     console.log(token);
+  //     if (token) {
+  //       config.headers.accessToken = token;
+  //       return config;
+  //     }
+  //   },
+  //   function (error) {
+  //     return Promise.reject(error);
+  //   }
+  // );
 
   await axios.interceptors.response.use(
     (response) => response,

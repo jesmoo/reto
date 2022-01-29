@@ -54,7 +54,7 @@ const InputHome = () => {
         sessionStorage.mainToken = response.config.xsrfCookieName;
         sessionStorage.email = emailData;
         if (sessionStorage.getItem('mainToken')) {
-          // window.location.href = '/2/phone';
+          window.location.href = '/2/phone';
         }
       }
     }
