@@ -8,3 +8,6 @@
   border-radius: 0.4rem;
   background-color: #eaeaea;
 }
+.bnsGeneral:hover {
+  cursor: pointer;
+}

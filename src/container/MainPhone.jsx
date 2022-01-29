@@ -5,13 +5,14 @@ import Input from '../components/Input';
 import BtnNext from '../components/BtnNext';
 import Login from '../components/Login';
 
-import getData from '../utils/getData';
+import ModalPhone from './ModalPhone';
 import sendData from '../utils/sendData';
 
 import '../Styles/containers/MainPhone.css';
 
 const MainPhone = () => {
   const [phone, setPhone] = useState({});
+  const [modal, setModal] = useState(0);
 
   const { id } = useParams();
   let numberPage = id;
@@ -27,16 +28,22 @@ const MainPhone = () => {
     const routeSend = `api/phoneNumber`;
     const routeValidation = `api/phoneNumber/verify`;
     const data = { number: phoneData };
+    const dataToken = { token: '9983' };
 
     const tokenHeader = sessionStorage.getItem('headerToken');
     const tokenMain = sessionStorage.getItem('mainToken');
     const tokens = { header: tokenHeader, main: tokenMain };
 
-    const responseSendPhone = await sendData(data, routeSend, tokens);
-    alert('tu codigo de verificacion es: 0011');
-    const responseValidation = await sendData(data, routeSend, tokens);
+    // const responseSendPhone = await sendData(data, routeSend, tokens);
+    // const responseValidation = await sendData(
+    //   dataToken,
+    //   routeValidation,
+    //   tokens
+    // );
+    // console.log(responseValidation);
+    // alert('tu codigo de verificacion es: 0011');
+    setModal(modal + 1);
 
-    return <h1>Hola</h1>;
     // const response = await sendData(data, sendURL);
     // if (response.status === 200) {
     //   sessionStorage.number = phoneData;
@@ -57,6 +64,7 @@ const MainPhone = () => {
 
   return (
     <>
+      {modal === 1 ? <ModalPhone number={phone.typed} /> : null}
       <Progress id={numberPage} />
       <h2 className="main__phone-title">¿Cuál es tu teléfono celular?</h2>
       <Input
