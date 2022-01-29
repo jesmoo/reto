@@ -5,7 +5,6 @@ import Signup from './Signup';
 import Btns from './Btns';
 import PasswordText from './PasswordText';
 
-import Cookies from 'universal-cookie';
 import sendData from '../utils/sendData';
 
 import '../Styles/components/InputHome.css';
@@ -46,14 +45,15 @@ const InputHome = () => {
 
     if (passwordData.length > 0 && emailData.length > 0) {
       const sendURL = `api/singUp`;
+
       const response = await sendData(data, sendURL);
-      setStatus(response.status);
+      // console.log(response);
+      // setStatus(response.status);
       if (response.status === 200) {
         sessionStorage.headerToken = response.config.xsrfHeaderName;
         sessionStorage.mainToken = response.config.xsrfCookieName;
         sessionStorage.email = emailData;
-        if (sessionStorage.getItem('email')) {
-          console.log('validacion');
+        if (sessionStorage.getItem('mainToken')) {
           // window.location.href = '/2/phone';
         }
       }
