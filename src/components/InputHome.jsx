@@ -5,6 +5,8 @@ import Signup from './Signup';
 import Btns from './Btns';
 import PasswordText from './PasswordText';
 
+import Cookies from 'universal-cookie';
+
 import sendData from '../utils/sendData';
 
 import '../Styles/components/InputHome.css';
@@ -15,22 +17,16 @@ const InputHome = () => {
 
   const [status, setStatus] = useState({});
   const [email, setEmail] = useState({});
-  const [datas, setDatas] = useState({
-    email: '',
-    password: '',
-  });
 
   const [samePassword, setSamePassword] = useState(0);
 
   const handlePassword = (e) => {
     const PasswordValue = e.target.value;
     setPassword({ ...password, typed: PasswordValue });
-    setDatas({ email: email.typed, password: password.typed });
   };
   const handleEmail = (e) => {
     const emailValue = e.target.value;
     setEmail({ ...email, typed: emailValue });
-    setDatas({ email: email.typed, password: password.typed });
   };
 
   const handlePasswordCheck = (e) => {
@@ -43,22 +39,23 @@ const InputHome = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const cookies = new Cookies();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const emailData = email.typed;
     const passwordData = password.typed;
-
+    const data = { email: emailData, password: passwordData };
     if (passwordData.length > 0 && emailData.length > 0) {
-      console.log(datas);
-      //   try {
-      //     const result = sendData(datas);
-      //     console.log(result);
-      //     setStatus(result);
-      //   } catch (err) {
-      //     console.log(err);
-      //   }
-      //   // const result = 400;
-      //   // setStatus(result);
+      const sendURL = `api/singUp`;
+
+      const response = await sendData(data, sendURL);
+
+      if (response.status === 200) {
+        cookies.set('email: ', emailData, { path: '/' });
+        cookies.set('password: ', passwordData, { path: '/' });
+        window.location.href = '/2/phone';
+      }
     }
   };
 

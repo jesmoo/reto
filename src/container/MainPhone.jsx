@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Progress from '../components/Progress';
 import Input from '../components/Input';
 import BtnNext from '../components/BtnNext';
 import Login from '../components/Login';
+import Cookies from 'universal-cookie';
+
 import '../Styles/containers/MainPhone.css';
 
 const MainPhone = () => {
+  const cookies = new Cookies();
   const [phone, setPhone] = useState({});
 
   const { id } = useParams();
@@ -17,6 +20,11 @@ const MainPhone = () => {
     const number = e.target.value;
     setPhone({ ...phone, typed: number });
   };
+
+  useEffect(() => {
+    console.log(cookies.get('email'));
+    console.log(cookies.get('password'));
+  });
 
   return (
     <>

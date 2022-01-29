@@ -1,29 +1,22 @@
-import errorMsj from './errorMsj';
+import axios from 'axios';
 
-const sendData = async (datas) => {
+const sendData = async (datas, route) => {
   const URL = 'https://frontend-recruiting.100ladrillos.com/';
-  const sendURL = `${URL}api/singUp`;
-  const data = datas;
-  const sendMethod = {
-    mode: 'no-cors',
+  const sendURL = `${URL}${route}`;
+  const proxy = 'https://thingproxy.freeboard.io/fetch/';
+  const config = {
+    url: `${proxy}${sendURL}`,
     method: 'POST',
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data),
+    data: JSON.stringify(datas),
   };
 
-  const response = await fetch(sendURL, sendMethod);
+  const response = await axios(config).catch((err) => err);
 
-  if (!response.ok) {
-    const { url, status, statusText } = response;
-    let errorsMsj = errorMsj(status);
-    throw Error(`Error: ${status} ${statusText} in fetch ${url}`);
-  }
-  const result = await response.json();
-
-  return result;
+  return response;
 };
 
 export default sendData;
