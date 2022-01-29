@@ -15,15 +15,22 @@ const InputHome = () => {
 
   const [status, setStatus] = useState({});
   const [email, setEmail] = useState({});
+  const [datas, setDatas] = useState({
+    email: '',
+    password: '',
+  });
+
   const [samePassword, setSamePassword] = useState(0);
 
   const handlePassword = (e) => {
     const PasswordValue = e.target.value;
     setPassword({ ...password, typed: PasswordValue });
+    setDatas({ email: email.typed, password: password.typed });
   };
   const handleEmail = (e) => {
     const emailValue = e.target.value;
     setEmail({ ...email, typed: emailValue });
+    setDatas({ email: email.typed, password: password.typed });
   };
 
   const handlePasswordCheck = (e) => {
@@ -40,18 +47,18 @@ const InputHome = () => {
     e.preventDefault();
     const emailData = email.typed;
     const passwordData = password.typed;
-    const datas = { email: emailData, password: passwordData };
 
     if (passwordData.length > 0 && emailData.length > 0) {
-      try {
-        const result = sendData(datas);
-        console.log(result);
-        setStatus(result);
-      } catch (err) {
-        console.log(err);
-      }
-      // const result = 400;
-      // setStatus(result);
+      console.log(datas);
+      //   try {
+      //     const result = sendData(datas);
+      //     console.log(result);
+      //     setStatus(result);
+      //   } catch (err) {
+      //     console.log(err);
+      //   }
+      //   // const result = 400;
+      //   // setStatus(result);
     }
   };
 
@@ -66,6 +73,7 @@ const InputHome = () => {
         <Input
           handle={handleEmail}
           value={email.typed || ''}
+          name={'email'}
           classSection={'inputs__email'}
           text={'¿Cuál es tu correo electrónico?'}
           type={'email'}
@@ -75,6 +83,7 @@ const InputHome = () => {
         <Input
           handle={handlePassword}
           value={password.typed || ''}
+          name={'password'}
           classSection={'inputs__password'}
           text={'Crea tu contraseña'}
           type={'password'}

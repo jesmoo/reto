@@ -1,14 +1,6 @@
 import React from 'react';
 
-const Input = ({
-  classSection,
-  text,
-  type,
-  place,
-  handle,
-  value,
-  textError,
-}) => {
+const Input = ({ classSection, text, type, place, handle, value, name }) => {
   return (
     <section className={`${classSection} inputs-container`}>
       <label htmlFor={type} className={`${type}-label labels`}>
@@ -20,6 +12,7 @@ const Input = ({
         value={value}
         type={type}
         id={type}
+        name={name}
         className={`${type}-input inputs`}
         placeholder={place}
       />
